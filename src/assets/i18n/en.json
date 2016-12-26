@@ -1,0 +1,20 @@
+{
+  "appname": "STUB",
+  "welcome": "Welcome",
+  "login": "Login",
+  "profile": "Profile",
+  "loading": "Loading...",
+  "checking_login": "(Checking Login...)",
+  "saving": "(Saving...)",
+  "newcomer": "New Comer",
+  "change_name": "Change Name",
+  "new_name": "New Name",
+  "enter_the_new_name": "Enter the new name",
+  "insufficient_storage_space": "Insufficient Storage Space",
+  "permission_issue": "Permission Issue",
+  "dismiss": "Dismiss",
+  "cancel": "Cancel",
+  "confirm": "Confirm",
+  "feedback": "Feedback",
+  "": ""
+}

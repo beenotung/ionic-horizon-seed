@@ -1,0 +1,15 @@
+[submodule "lib/tslib"]
+	path = lib/tslib
+	url = https://github.com/beenotung/tslib.git
+[submodule "src/lib/typeStub-horizon-client"]
+	path = lib/typeStub-horizon-client
+	url = https://github.com/beenotung/typeStub-horizon-client
+[submodule "lib/LargeLocalStorage"]
+	path = lib/LargeLocalStorage
+	url = https://github.com/beenotung/LargeLocalStorage.git
+[submodule "lib/scsslib"]
+	path = lib/scsslib
+	url = https://github.com/beenotung/scsslib
+[submodule "lib/typeStub-ramda"]
+	path = lib/typeStub-ramda
+	url = https://github.com/beenotung/typeStub-ramda
