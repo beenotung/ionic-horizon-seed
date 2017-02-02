@@ -6,7 +6,6 @@ import {MyApp} from "./app.component";
 import {CustomBrowserXhr} from "./config";
 import {ProfilePage} from "../pages/profile/profile";
 import {Storage}from "@ionic/storage";
-import {FeedbackPage} from "../pages/feedback/feedback";
 import {LoginPage} from "../pages/login/login";
 
 export const AppComponents = [
