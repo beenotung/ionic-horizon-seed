@@ -4,13 +4,16 @@ import {HttpModule, Http, BrowserXhr} from '@angular/http';
 import {TranslateModule, TranslateLoader, TranslateStaticLoader} from 'ng2-translate';
 import {MyApp} from "./app.component";
 import {CustomBrowserXhr} from "./config";
-import {ProfilePage} from "../pages/profile/profile";
 import {Storage}from "@ionic/storage";
 import {LoginPage} from "../pages/login/login";
+import {ModalHeaderComponent} from "../components/modal-header/modal-header";
+import {MenuPageHeaderComponent} from "../components/menu-page-header/menu-page-header";
 
 export const AppComponents = [
   MyApp
   , LoginPage
+  , MenuPageHeaderComponent
+  , ModalHeaderComponent
 ];
 
 @NgModule({
