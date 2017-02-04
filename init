@@ -1,0 +1,5 @@
+#!/bin/bash
+npm install
+mkdir -p www
+ionic plugin reset
+git submodule update --init
