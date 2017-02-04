@@ -5,20 +5,64 @@
   Ionic pages and navigation.
 -->
 <ion-header>
+
   <ion-navbar>
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>Login</ion-title>
   </ion-navbar>
+
 </ion-header>
 
+
 <ion-content padding>
-  <h3>Ionic Menu Starter</h3>
+  <ion-row>
+    <ion-col style="margin:auto; text-align: center">
+      <img src="../../assets/img/logo.png" height="150" width="150"/>
+    </ion-col>
+  </ion-row>
 
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
-  </p>
+  <ion-item>
+    <ion-label color="primary">Username</ion-label>
+    <ion-input [(ngModel)]="username"></ion-input>
+  </ion-item>
 
-  <button ion-button secondary menuToggle>Toggle Menu</button>
+  <ion-item>
+    <ion-label color="primary">Password</ion-label>
+    <ion-input type="password" [(ngModel)]="password"></ion-input>
+  </ion-item>
+  <ion-row>
+    <ion-col>
+      <div style="text-align:end">
+        <a (click)="resetPassword()">Reset Password</a>
+      </div>
+    </ion-col>
+  </ion-row>
+
+  <button block ion-button color="primary" (click)="login()">Login</button>
+  <!--<button block ion-button color="secondary">Sign Up</button>-->
+
+  <ion-item-divider></ion-item-divider>
+
+  <ion-row>
+    <ion-col text-center>
+      <a color="primary">
+        <ion-icon name="logo-facebook"></ion-icon>
+        <span style="font-weight:bold">Login in with Facebook</span>
+      </a>
+    </ion-col>
+  </ion-row>
+
 </ion-content>
+
+<ion-footer>
+  <ion-row>
+    <ion-col text-center>
+      <span> Don't have an account? </span> <a>Sign up</a>
+    </ion-col>
+  </ion-row>
+  <span>
+    Version 0.1.0
+  </span>
+</ion-footer>
