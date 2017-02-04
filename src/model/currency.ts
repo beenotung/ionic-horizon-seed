@@ -101,7 +101,7 @@ export namespace Currency {
     /**
      * for exchange rate and also display name (in english)
      * */
-    const baseUrl2 = 'http://www.ecb.europa.eu/stats/exchange/eurofxref/html/index.en.html';
+    // const baseUrl2 = 'http://www.ecb.europa.eu/stats/exchange/eurofxref/html/index.en.html';
 
     interface APIResponse {
       base: string;
