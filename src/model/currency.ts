@@ -1,8 +1,6 @@
 import {OldRecord, NewRecord, Horizon, TableObject} from "../../lib/typeStub-horizon-client/index";
 import * as fetch from "isomorphic-fetch";
-import {toNumber, objMap, objForEach, objValues} from "../../lib/tslib/src/lang";
-import {unique} from "../../lib/tslib/src/array";
-import {concat} from "../../lib/tslib/src/functional";
+import {toNumber, objForEach, objValues} from "../../lib/tslib/src/lang";
 
 export class Currency implements OldRecord {
   static tableName = 'currencies';
