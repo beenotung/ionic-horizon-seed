@@ -1,0 +1,44 @@
+<!--
+  Generated template for the IonTable component.
+
+  See https://angular.io/docs/ts/latest/api/core/index/ComponentMetadata-class.html
+  for more info on Angular 2 Components.
+
+  TODO add sortable header
+  TODO add filterable header?
+
+  TODO wrap header in ion-list-header?
+  TODO wrap body in ion-item or ion-list?
+-->
+
+<table *ngIf="useTable">
+  <thead>
+  <tr>
+    <th *ngFor="let header of headers">{{header}}</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let datum of data; let rowIndex = index">
+    <td *ngFor="let col of datum_to_cols(datum); let colIndex = index" (click)="onclick(datum,col, rowIndex, colIndex)">{{col}}</td>
+  </tr>
+  </tbody>
+</table>
+
+<ion-list *ngIf="!useTable">
+  <h6 *ngIf="title && headers">{{title}}</h6>
+  <ion-list-header>
+    <span *ngIf="title && !headers">{{title}}</span>
+    <ion-row *ngIf="headers">
+      <ion-col *ngFor="let header of headers">
+        {{header}}
+      </ion-col>
+    </ion-row>
+  </ion-list-header>
+  <ion-item *ngFor="let datum of data; let rowIndex = index">
+    <ion-row>
+      <ion-col *ngFor="let col of datum_to_cols(datum); let colIndex = index" (click)="onclick(datum, col, rowIndex, colIndex)">
+        {{col}}
+      </ion-col>
+    </ion-row>
+  </ion-item>
+</ion-list>

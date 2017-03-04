@@ -1,0 +1,33 @@
+<!--
+  Generated template for the CommonOverview component.
+
+  See https://angular.io/docs/ts/latest/api/core/index/ComponentMetadata-class.html
+  for more info on Angular 2 Components.
+-->
+
+<ion-searchbar [(ngModel)]="searchText" [(formControl)]="searchForm" [placeholder]="placeholder"></ion-searchbar>
+
+<ion-buttons>
+  <button ion-button (click)="advancedSearch.emit($event)">Advanced Search</button>
+  <button ion-button (click)="createNew.emit($event)">{{create_new_text}}</button>
+</ion-buttons>
+
+<!-- default (recent list) -->
+<ion-table
+  [hidden]="searchText.trim().length!=0"
+  [title]="recentListTitle"
+  [headers]="headers"
+  [data]="recentList"
+  (cellClick)="cellClick.emit($event)"
+  [datum_to_cols]="datum_to_cols"
+></ion-table>
+
+<!-- search result -->
+<ion-table
+  [hidden]="searchText.trim().length<=1"
+  [title]="searchResultTitle"
+  [headers]="headers"
+  [data]="searchResult"
+  (cellClick)="cellClick.emit($event)"
+  [datum_to_cols]="datum_to_cols"
+></ion-table>
