@@ -1,7 +1,17 @@
 #!/bin/bash
-tmux start
-tmux new -dP -s ionic 'ionic serve -a'
-cd ../stub-horizon
-tmux new -dP -s hz 'hz serve --dev'
-cd ../stub-ionic
-tmux attach -t ionic
+hash "tmux" 2>/dev/null
+if [ $? == 0 ]; then
+  ## has tmux installed
+  tmux start
+  tmux new -dP -s ionic 'ionic serve -a'
+  cd ../stub-horizon
+  tmux new -dP -s hz 'hz serve --dev'
+  cd ../stub-ionic
+  tmux attach -t ionic
+else
+  ## do not has tmux installed
+  cd ../stub-horizon
+  hz serve --dev &
+  cd ../stub-ionic
+  ionic serve -a
+fi
