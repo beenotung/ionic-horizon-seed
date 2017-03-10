@@ -1,4 +1,6 @@
 import {Component, Input} from '@angular/core';
+import {PopoverController} from "ionic-angular";
+import {SettingsComponent} from "../settings/settings";
 
 /*
  Generated class for the MenuPageHeader component.
@@ -15,4 +17,11 @@ export class MenuPageHeaderComponent {
   @Input()
   title: string;
 
+  constructor(private popoverCtrl: PopoverController) {
+  }
+
+  showSettings($event: Event) {
+    this.popoverCtrl.create(SettingsComponent)
+      .present({ev: $event})
+  }
 }

@@ -1,0 +1,14 @@
+<!--
+  Generated template for the UploadButton component.
+
+  See https://angular.io/docs/ts/latest/api/core/index/ComponentMetadata-class.html
+  for more info on Angular 2 Components.
+-->
+
+<button ion-button (click)="selectFile()">
+  <ion-icon name="arrow-round-up">
+    <span *ngIf="text">{{text}}</span>
+  </ion-icon>
+</button>
+<input type="file" (change)="addFile($event)" hidden *ngIf="multiple" multiple #input>
+<input type="file" (change)="addFile($event)" hidden *ngIf="!multiple" #input>

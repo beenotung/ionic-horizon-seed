@@ -1,0 +1,15 @@
+document-list {
+  .document-icon {
+    overflow-wrap: normal;
+    overflow: auto;
+    max-width: 50px;
+  }
+  ion-col {
+    //overflow-wrap: normal;
+    //text-overflow: clip;
+    overflow: auto;
+    word-wrap: break-word;
+  }
+  ion-buttons {
+  }
+}

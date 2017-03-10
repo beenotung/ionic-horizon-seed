@@ -5,7 +5,7 @@ import {toNumber, objForEach, objValues} from "../../lib/tslib/src/lang";
 export class Currency implements OldRecord {
   static tableName = 'currencies';
   id: string;
-  [key: string]: string|Array<NewRecord>|number|boolean|NewRecord;
+  [key: string]: string | Array<NewRecord> | number | boolean | NewRecord;
 
   code: string;
   displayName: string;
@@ -101,7 +101,7 @@ export namespace Currency {
     /**
      * for exchange rate and also display name (in english)
      * */
-    // const baseUrl2 = 'http://www.ecb.europa.eu/stats/exchange/eurofxref/html/index.en.html';
+      // const baseUrl2 = 'http://www.ecb.europa.eu/stats/exchange/eurofxref/html/index.en.html';
 
     interface APIResponse {
       base: string;

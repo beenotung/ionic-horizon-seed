@@ -11,3 +11,11 @@
   @extend .center-wrapper;
   width: 100%;
 }
+
+//ion-item:nth-child(even).alt-color {
+//  background: lightgray;
+//}
+
+*:nth-child(even).alt-color {
+  background: lighten(lightblue, 16);
+}

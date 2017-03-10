@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {NavController, NavParams} from 'ionic-angular';
+import {AccountType} from "../../model/config/account";
 
 /*
  Generated class for the MainDashboard page.
@@ -12,8 +13,12 @@ import {NavController, NavParams} from 'ionic-angular';
   templateUrl: 'main-dashboard.html'
 })
 export class MainDashboardPage {
+  accountType: AccountType.Type;
+  AccountType = AccountType.Type;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.accountType = AccountType.get();
+    console.log('account type', this.accountType);
   }
 
   ionViewDidLoad() {

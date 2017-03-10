@@ -1,5 +1,7 @@
 import {Component, OnInit, OnDestroy} from '@angular/core';
 import {NavController, NavParams} from 'ionic-angular';
+import {AccountType} from "../../model/config/account";
+import {isNumber} from "../../../lib/tslib/src/lang";
 
 /*
  Generated class for the DevSettings page.
@@ -12,21 +14,25 @@ import {NavController, NavParams} from 'ionic-angular';
   templateUrl: 'dev-settings.html'
 })
 export class DevSettingsPage implements OnInit, OnDestroy {
-  keyAccountType: string;
+  accountType: AccountType.Type;
+  AccountTypeList = Object.keys(AccountType.Type).filter(x => !isNumber(x));
+  AccountType = AccountType.Type;
 
   ngOnInit(): void {
     console.log('loading settings');
+    this.accountType = AccountType.get();
   }
 
   ngOnDestroy(): void {
     console.log('saving settings');
+    AccountType.set(this.accountType);
   }
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad DevSettingsPage');
+    console.log('ionViewDidLoad DevSettingsPage', this.AccountTypeList);
   }
 
 }

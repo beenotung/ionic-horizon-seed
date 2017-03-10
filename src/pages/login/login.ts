@@ -1,5 +1,8 @@
 import {Component} from '@angular/core';
 import {NavController, NavParams} from 'ionic-angular';
+import {MainDashboardPage} from "../main-dashboard/main-dashboard";
+import {DatabaseService} from "../../providers/databaseService";
+import {CommonService} from "../../providers/commonService";
 
 /*
  Generated class for the Login page.
@@ -16,7 +19,10 @@ export class LoginPage {
   username: string;
   password: string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController
+    , private db: DatabaseService
+    , private comm: CommonService
+    , public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
@@ -25,6 +31,7 @@ export class LoginPage {
 
   login() {
     console.log('try to login', this.username, this.password);
+    this.navCtrl.setRoot(MainDashboardPage);
   }
 
   resetPassword() {

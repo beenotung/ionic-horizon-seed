@@ -18,13 +18,8 @@
       <ion-label>
         Key Account Identity
       </ion-label>
-      <ion-select [(ngModel)]="keyAccountType">
-        <ion-option value="team_leader">
-          Team Manager
-        </ion-option>
-        <ion-option value="main_account_manager">
-          Main Account Manager
-        </ion-option>
+      <ion-select [(ngModel)]="accountType">
+        <ion-option *ngFor="let accountType of AccountTypeList" [value]="AccountType[accountType]">{{accountType}}</ion-option>
       </ion-select>
     </ion-item>
   </ion-list>

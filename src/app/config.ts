@@ -7,7 +7,10 @@ import {BrowserXhr} from "@angular/http";
 import {setProp} from "../../lib/tslib/src/functional";
 
 export namespace config {
+  const version = "0.1.1";
   export const fallbackLang = 'en';
+  export let typingSpeed = 1000 / 30;
+
   const server_name = "STUB";
   class Delayed {
     serverIp: string;
@@ -18,9 +21,16 @@ export namespace config {
   let delayed = new Delayed();
 
   /**@remark must be called before loading horizon */
-  export const initialize = createAsyncLazy<Delayed>(async() => {
+  export const initialize = createAsyncLazy<Delayed>(async () => {
+    /* check local storage version */
+    if (localStorage['version'] != version) {
+      console.log('Incompatible update: reset localStorage');
+      localStorage.clear();
+    }
+    localStorage['version'] = version;
+
     // console.log('config initializing...');
-    let defer = createDefer<Delayed,any>();
+    let defer = createDefer<Delayed, any>();
 
     if (server_name != "STUB") {
       let host = await externalAPI.getHostByName(server_name);
@@ -35,7 +45,7 @@ export namespace config {
 
     let RealWebSocket = WebSocket;
 
-    function WrappedWebSocket(url: string, protocols?: string|string[]) {
+    function WrappedWebSocket(url: string, protocols?: string | string[]) {
       if (url.match(/\/horizon$/i)) {
         let parser = document.createElement('a');
         parser.href = url;
@@ -75,3 +85,5 @@ export class CustomBrowserXhr extends BrowserXhr {
     return <any>(xhr);
   }
 }
+
+config.initialize();

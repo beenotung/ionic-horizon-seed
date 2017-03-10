@@ -1,0 +1,18 @@
+<!--
+  Generated template for the Settings component.
+
+  See https://angular.io/docs/ts/latest/api/core/index/ComponentMetadata-class.html
+  for more info on Angular 2 Components.
+-->
+
+<ion-list radio-group [(ngModel)]="lang">
+  <ion-list-header>
+    {{'LANG' | translate}}
+  </ion-list-header>
+  <ion-item *ngFor="let lang of langs">
+    <ion-label>
+      {{lang | translate}}
+    </ion-label>
+    <ion-radio [value]="lang" (ionSelect)="chooseLang(lang)"></ion-radio>
+  </ion-item>
+</ion-list>

@@ -1,0 +1,50 @@
+<!--
+  Generated template for the DocumentList component.
+
+  See https://angular.io/docs/ts/latest/api/core/index/ComponentMetadata-class.html
+  for more info on Angular 2 Components.
+-->
+
+<ion-list>
+  <ion-item no-lines>
+    Documents
+  </ion-item>
+  <ion-list-header>
+    <ion-row>
+      <ion-col class="document-icon" text-wrap>Type</ion-col>
+      <ion-col>Document Name</ion-col>
+      <ion-col>Size</ion-col>
+      <ion-col text-center>Action</ion-col>
+    </ion-row>
+  </ion-list-header>
+  <ion-item *ngFor="let document_file of document_files">
+    <ion-row center>
+      <ion-col class="document-icon">
+        <!--<ion-img [src]="filetype_icon(document_file)"></ion-img>-->
+        <img src="{{filetype_icon(document_file)}}">
+      </ion-col>
+      <ion-col>{{document_file.name}}</ion-col>
+      <ion-col>{{document_file.size | format_byte }}</ion-col>
+      <ion-col text-center>
+        <ion-buttons>
+          <button ion-button>
+            <ion-icon name="download">
+              Download
+            </ion-icon>
+          </button>
+          <button ion-button>
+            <ion-icon name="trash">
+              Delete
+            </ion-icon>
+          </button>
+        </ion-buttons>
+      </ion-col>
+    </ion-row>
+  </ion-item>
+  <ion-buttons text-center>
+    <upload-button
+      text="Upload"
+      (addFiles)="upload_file($event)"
+    ></upload-button>
+  </ion-buttons>
+</ion-list>

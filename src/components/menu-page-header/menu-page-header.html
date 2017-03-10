@@ -11,5 +11,23 @@
   <button ion-button menuToggle>
     <ion-icon name="menu"></ion-icon>
   </button>
+
   <ion-title>{{title}}</ion-title>
+
+  <ion-buttons menuClose right>
+    <button ion-button>
+      <ion-icon name="person">
+        Admin
+      </ion-icon>
+    </button>
+    <button ion-button>
+      <ion-icon name="log-out">
+        Logout
+      </ion-icon>
+    </button>
+    <button ion-button (click)="showSettings($event)">
+      <ion-icon name="settings">
+      </ion-icon>
+    </button>
+  </ion-buttons>
 </ion-navbar>

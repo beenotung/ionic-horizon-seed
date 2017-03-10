@@ -8,11 +8,10 @@ import * as typeStubHorizon from "../../lib/typeStub-horizon-client/index";
 import {clear} from "../../lib/tslib/src/array";
 import {User} from "../model/user";
 // import * as LargeLocalStorage from "../../lib/LargeLocalStorage/dist/index";
-import {TranslateService} from "ng2-translate";
-import {CommonService} from "./commonService";
 import {Storage} from "@ionic/storage"
 import {Currency} from "../model/currency";
 import {TableObject} from "../../lib/typeStub-horizon-client/index";
+import {StorageKey, StorageService} from "./storage-service";
 
 /*
  Generated class for the DatabaseService provider.
@@ -20,35 +19,24 @@ import {TableObject} from "../../lib/typeStub-horizon-client/index";
  See https://angular.io/docs/ts/latest/guide/dependency-injection.html
  for more info on providers and Angular 2 DI.
  */
-// const url = config.serverUrlBase + 'horizon/horizon.js';
-// const url = '/horizon/horizon.js';
-let cached: {
-  user: User
-  , currencies: Currency[]
-  , hz: typeStubHorizon.Horizon
-} = <any>{};
 @Injectable()
 export class DatabaseService {
-  // private hz: typeStubHorizon.Horizon;
-  private pendings: Defer<typeStubHorizon.Horizon,any>[] = [];
-  // private user: User;
-  // private currencies: Currency[];
+  private pendings: Defer<typeStubHorizon.Horizon, any>[] = [];
   progress: number;
-  // userModel: (userId: string) => FinalQuery<User>;
-
+  private user: User;
+  private dbCache = new DBCache();
   // private storage: LargeLocalStorage;//=new LargeLocalStorage({size:this.storageSize,name:'cacheDb'});
 
   constructor(private http: Http,
-              private storage: Storage,
-              private common: CommonService,
-              private translate: TranslateService,) {
+              private storageService: StorageService,
+              private storage: Storage,) {
     config.initialize();
     this.initialize();
   }
 
   initialize() {
     console.log('bootstrapping horizon...');
-    let load_horizon = async() => {
+    let load_horizon = async () => {
       console.log('loading horizon...');
       this.http.get((await config.initialize()).serverUrlBase() + 'horizon/horizon.js')
         .map(res => res.text())
@@ -79,36 +67,36 @@ export class DatabaseService {
     let conn_horizon = () => {
       console.log('connecting to horizon...');
       // let hz = Horizon({host: config.serverIp});
-      cached.hz = Horizon();
-      cached.hz.onReady(() => {
+      this.dbCache.hz = Horizon();
+      this.dbCache.hz.onReady(() => {
         console.log('horizon is ready');
         onConnected().then(() =>
-          clear(this.pendings).forEach(d => d.resolve(cached.hz))
+          clear(this.pendings).forEach(d => d.resolve(this.dbCache.hz))
         );
       });
-      cached.hz.onSocketError(err => {
+      this.dbCache.hz.onSocketError(err => {
         console.log('horizon socket error', err)
       });
-      cached.hz.connect();
+      this.dbCache.hz.connect();
     };
     load_horizon();
 
-    let initTables = async() => {
+    let initTables = async () => {
       let hz = await this.getHz();
       return Promise.all([
         Currency.initTable(hz)
       ]);
     };
 
-    let onConnected = async() => {
+    let onConnected = async () => {
       await initTables();
-      cached.user = await this.loadUser();
+      this.user = await this.loadUser();
       return 'ok';
     };
   }
 
-  loadUser: () => Promise<User> = async() => {
-    let userId = await this.storage.get('userId');
+  loadUser: () => Promise<User> = async () => {
+    let userId = await this.storageService.get(StorageKey.UserId);
     if (userId) {
       // console.log('old user id', userId);
       return await (await this.getHz())(User.tableName).find(userId).fetch().toPromise();
@@ -121,19 +109,19 @@ export class DatabaseService {
       let userId = (await (await this.getHz())(User.tableName).store(user).toPromise()).id;
       user.id = userId;
       // console.log('new user id', userId);
-      await this.storage.set('userId', userId);
+      await this.storageService.set(StorageKey.UserId, userId);
       return user;
     }
   };
 
   logout() {
-    return this.storage.remove('userId');
+    return this.storageService.remove(StorageKey.UserId);
   }
 
   getHz(): Promise<typeStubHorizon.Horizon> {
     let defer = createDefer();
-    if (cached.hz) {
-      defer.resolve(cached.hz);
+    if (this.dbCache.hz) {
+      defer.resolve(this.dbCache.hz);
     }
     else {
       this.pendings.push(defer);
@@ -145,33 +133,33 @@ export class DatabaseService {
     return this.getHz().then(hz => hz(name));
   }
 
-  updateCachedUser: () => Promise<User> = async() => {
-    cached.user = await this.loadUser();
-    return cached.user;
+  updateCachedUser: () => Promise<User> = async () => {
+    this.user = await this.loadUser();
+    return this.user;
   };
 
   clearCache() {
-    cached = <any>{};
+    this.dbCache = new DBCache();
   }
 
-  getCachedUser: () => Promise<User> = async() => {
-    if (cached.user)
-      return cached.user;
+  getCachedUser: () => Promise<User> = async () => {
+    if (this.dbCache.user)
+      return this.dbCache.user;
     return await this.updateCachedUser();
   };
 
   /**
    * @deprecated slow and potentially non-atomic
    * */
-  storeCachedUser: () => Promise<any> = async() => {
-    if (cached.user) {
+  storeCachedUser: () => Promise<any> = async () => {
+    if (this.dbCache.user) {
       return await (await this.getTable(User.tableName)).store(await this.getCachedUser()).toPromise();
     }
     throw new Error('no cached user');
   };
 
   updateUser(partialUser: User): Promise<any> {
-    return (async() => {
+    return (async () => {
       let cachedUser = await this.getCachedUser();
       Object.assign(cachedUser, partialUser);
       partialUser.id = cachedUser.id;
@@ -180,16 +168,21 @@ export class DatabaseService {
   }
 
   getCachedCurrencies() {
-    return (async() => {
-      if (cached.currencies)
-        return cached.currencies;
+    return (async () => {
+      if (this.dbCache.currencies)
+        return this.dbCache.currencies;
       console.log('not cached currencies');
-      cached.currencies = await Currency.api.loadAll(await this.getHz());
-      return cached.currencies;
+      this.dbCache.currencies = await Currency.api.loadAll(await this.getHz());
+      return this.dbCache.currencies;
     })();
   }
 }
 class Tables {
   users: TableObject<User>;
   currencies: TableObject<Currency>;
+}
+class DBCache {
+  hz: typeStubHorizon.Horizon;
+  user: User;
+  currencies: Currency[];
 }

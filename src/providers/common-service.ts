@@ -1,15 +1,13 @@
 import {TranslateService} from "ng2-translate";
 import {first_non_null} from "../../lib/tslib/src/lang";
 import {config} from "../app/config";
-import {Component} from "@angular/core";
+import {Injectable} from "@angular/core";
+import {DatabaseService} from "./database-service";
 
-@Component({
-  providers: [
-    TranslateService,
-  ],
-})
+@Injectable()
 export class CommonService {
-  constructor(private translate: TranslateService) {
+  constructor(private translate: TranslateService
+    , private db: DatabaseService) {
     let lang = first_non_null(
       translate.getDefaultLang()
       , translate.getBrowserCultureLang()

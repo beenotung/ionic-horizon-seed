@@ -1,19 +1,15 @@
-import {Component, ViewChild} from '@angular/core';
-import {Nav, Platform} from 'ionic-angular';
-import {StatusBar, Splashscreen} from 'ionic-native';
-import {DatabaseService} from "../providers/databaseService";
-import {CommonService} from "../providers/commonService";
+import {Component, ViewChild} from "@angular/core";
 import {TranslateService} from "ng2-translate";
-import {translateAsync} from "../../lib/tslib/src/async";
+import {CommonService} from "../providers/common-service";
+import {Nav, Platform} from "ionic-angular";
 import {LoginPage} from "../pages/login/login";
+import {MainDashboardPage} from "../pages/main-dashboard/main-dashboard";
+import {DevSettingsPage} from "../pages/dev-settings/dev-settings";
+import {translateAsync} from "../../lib/tslib/src/async";
+import {Splashscreen, StatusBar} from "ionic-native";
 
 @Component({
   templateUrl: 'app.html',
-  providers: [
-    TranslateService,
-    CommonService,
-    DatabaseService,
-  ],
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
@@ -27,10 +23,13 @@ export class MyApp {
               private common: CommonService,) {
     this.initializeApp();
 
+    // this.rootPage = MainDashboardPage;
+    /* just for the ease of dev */
+
     // used for an example of ngFor and navigation
     this.pages = [
-      {title: 'login', component: LoginPage}
-      , {title: 'login', component: LoginPage}
+      {title: 'dashboard', component: MainDashboardPage}
+      , {title: 'dev_settings', component: DevSettingsPage}
     ];
 
     this.pages.forEach(x => translateAsync(translate, x.title).then(s => x.title = s));
