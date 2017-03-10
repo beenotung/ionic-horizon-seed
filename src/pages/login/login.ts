@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
 import {NavController, NavParams} from 'ionic-angular';
 import {MainDashboardPage} from "../main-dashboard/main-dashboard";
-import {DatabaseService} from "../../providers/databaseService";
-import {CommonService} from "../../providers/commonService";
+import {DatabaseService} from "../../providers/database-service";
+import {CommonService} from "../../providers/common-service";
 
 /*
  Generated class for the Login page.
@@ -21,7 +21,6 @@ export class LoginPage {
 
   constructor(public navCtrl: NavController
     , private db: DatabaseService
-    , private comm: CommonService
     , public navParams: NavParams) {
   }
 
