@@ -1,0 +1,7 @@
+#!/bin/bash
+tmp_app="newapp.tmp"
+if [ ! -d "$tmp_app" ]; then
+  ionic start --v2 "$tmp_app"
+fi
+meld package.json "$tmp_app"/package.json
+lib/tslib/inject-lib

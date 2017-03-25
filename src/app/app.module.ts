@@ -14,7 +14,7 @@ import {SettingsComponent} from "../components/settings/settings";
 import {ErrorHandler, NgModule} from "@angular/core";
 import {FormatByte} from "../pipes/format-byte";
 import {IonicApp, IonicErrorHandler, IonicModule} from "ionic-angular";
-import {Storage} from "@ionic/storage"
+import {Storage} from "@ionic/storage";
 import {BrowserXhr, Http, HttpModule} from "@angular/http";
 import {TranslateLoader, TranslateModule, TranslateService, TranslateStaticLoader} from "ng2-translate";
 import {ChartsModule} from "ng2-charts";
@@ -39,6 +39,10 @@ export const AppComponents = [
   , SettingsComponent
 ];
 
+function provideStorage() {
+  return new Storage();
+}
+
 @NgModule({
   declarations: [
     AppComponents
@@ -59,9 +63,9 @@ export const AppComponents = [
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     {provide: BrowserXhr, useClass: CustomBrowserXhr},
-    Storage,
-    CommonService,
+    {provide: Storage, useFactory: provideStorage},
     StorageService,
+    CommonService,
     TranslateService,
     DatabaseService,
   ],

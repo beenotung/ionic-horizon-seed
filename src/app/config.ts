@@ -67,20 +67,18 @@ export namespace config {
   });
 }
 
-export let progressEventEmitter = new EventEmitter<ProgressEvent>();
 @Injectable()
 export class CustomBrowserXhr extends BrowserXhr {
-  constructor(private service: any) {
+  static progressEventEmitter = new EventEmitter<ProgressEvent>();
+
+  constructor() {
     super()
   }
 
   build(): any {
     let xhr = super.build();
     xhr.onprogress = (event: any) => {
-      if (this.service)
-        this.service.progressEventObservable.next(event);
-      else
-        progressEventEmitter.emit(event);
+      CustomBrowserXhr.progressEventEmitter.emit(event);
     };
     return <any>(xhr);
   }

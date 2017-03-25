@@ -1,16 +1,16 @@
-import {Injectable} from '@angular/core';
-import {Http} from '@angular/http';
-import 'rxjs/add/operator/map';
-import {config, progressEventEmitter} from "../app/config";
-import {Defer, createDefer} from "../../lib/tslib/src/async";
+import {Injectable} from "@angular/core";
+import {Http} from "@angular/http";
+import "rxjs/add/operator/map";
+import {config, CustomBrowserXhr} from "../app/config";
+import {createDefer, Defer} from "../../lib/tslib/src/async";
 import * as Horizon from "@horizon/client/dist/horizon";
 import * as typeStubHorizon from "../../lib/typeStub-horizon-client/index";
+import {TableObject} from "../../lib/typeStub-horizon-client/index";
 import {clear} from "../../lib/tslib/src/array";
 import {User} from "../model/user";
 // import * as LargeLocalStorage from "../../lib/LargeLocalStorage/dist/index";
-import {Storage} from "@ionic/storage"
+import {Storage} from "@ionic/storage";
 import {Currency} from "../model/currency";
-import {TableObject} from "../../lib/typeStub-horizon-client/index";
 import {StorageKey, StorageService} from "./storage-service";
 
 /*
@@ -58,7 +58,7 @@ export class DatabaseService {
             setTimeout(load_horizon, 1000);
           }, () => sub.unsubscribe()
         );
-      let sub = progressEventEmitter.subscribe((event: any) => {
+      let sub = CustomBrowserXhr.progressEventEmitter.subscribe((event: any) => {
         console.log(event.loaded, event.loaded / 266826 * 100 + '%');
         this.progress = event.loaded / 266826;
       });
