@@ -3,3 +3,4 @@ npm install
 mkdir -p www
 ionic plugin reset
 git submodule update --init
+lib/tslib/inject-lib
