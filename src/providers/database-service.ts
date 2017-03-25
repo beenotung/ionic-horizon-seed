@@ -1,8 +1,7 @@
 import {Injectable} from "@angular/core";
 import {Http} from "@angular/http";
 import "rxjs/add/operator/map";
-import {config, CustomBrowserXhr} from "../app/config";
-import {createDefer, Defer} from "../../lib/tslib/src/async";
+import {autoRetryAsync, createDefer, Defer} from "../../lib/tslib/src/async";
 import * as typeStubHorizon from "../../lib/typeStub-horizon-client/index";
 import {clear} from "../../lib/tslib/src/array";
 import {User} from "../model/user";
@@ -10,6 +9,9 @@ import {User} from "../model/user";
 import {Storage} from "@ionic/storage";
 import {Currency} from "../model/currency";
 import {StorageKey, StorageService} from "./storage-service";
+import {horizon_api_size, load_horizon_ng} from "../../lib/tslib/src/horizon";
+import {config} from "../app/config";
+import {CustomBrowserXhr} from "../../lib/tslib/src/angular";
 declare let Horizon: typeStubHorizon.HorizonFunc;
 
 /*
@@ -35,35 +37,15 @@ export class DatabaseService {
 
   initialize() {
     console.log('bootstrapping horizon...');
-    let load_horizon = async () => {
-      console.log('loading horizon...');
-      this.http.get((await config.initialize()).serverUrlBase() + 'horizon/horizon.js')
-        .map(res => res.text())
-        .subscribe(
-          data => {
-            console.log('length', data.length);
-            let script = document.createElement('script');
-            script.innerText = data;
-            document.head.appendChild(script);
-            if (typeof Horizon != 'function') {
-              console.error('failed to inject horizon script');
-              setTimeout(load_horizon, 1000);
-            } else {
-              conn_horizon();
-            }
-          }
-          , err => {
-            console.error(err);
-            setTimeout(load_horizon, 1000);
-          }, () => sub.unsubscribe()
-        );
+    (async () => {
       let sub = CustomBrowserXhr.progressEventEmitter.subscribe((event: any) => {
-        console.log(event.loaded, event.loaded / 266826 * 100 + '%');
-        this.progress = event.loaded / 266826;
+        console.log(event.loaded, event.loaded / horizon_api_size * 100 + '%');
       });
-    };
+      let url = (await config.initialize()).serverUrlBase() + 'horizon/horizon.js';
+      let preF = () => console.log('loading horizon...');
+      await autoRetryAsync(() => load_horizon_ng(this.http, url, preF));
+      sub.unsubscribe();
 
-    let conn_horizon = () => {
       console.log('connecting to horizon...');
       // let hz = Horizon({host: config.serverIp});
       this.dbCache.hz = Horizon();
@@ -77,8 +59,8 @@ export class DatabaseService {
         console.log('horizon socket error', err)
       });
       this.dbCache.hz.connect();
-    };
-    load_horizon();
+    })();
+
 
     let initTables = async () => {
       let hz = await this.getHz();

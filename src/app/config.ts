@@ -2,8 +2,6 @@ import {createAsyncLazy} from "../../lib/tslib/src/lazy";
 import {createDefer} from "../../lib/tslib/src/async";
 import {externalAPI} from "../../lib/tslib/src/externAPI";
 import {bindFunction} from "../../lib/tslib/src/lang";
-import {EventEmitter, Injectable} from "@angular/core";
-import {BrowserXhr} from "@angular/http";
 import {setProp} from "../../lib/tslib/src/functional";
 
 export namespace config {
@@ -67,21 +65,5 @@ export namespace config {
   });
 }
 
-@Injectable()
-export class CustomBrowserXhr extends BrowserXhr {
-  static progressEventEmitter = new EventEmitter<ProgressEvent>();
-
-  constructor() {
-    super()
-  }
-
-  build(): any {
-    let xhr = super.build();
-    xhr.onprogress = (event: any) => {
-      CustomBrowserXhr.progressEventEmitter.emit(event);
-    };
-    return <any>(xhr);
-  }
-}
 
 config.initialize();

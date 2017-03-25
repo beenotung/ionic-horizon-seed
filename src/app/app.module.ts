@@ -18,10 +18,10 @@ import {Storage} from "@ionic/storage";
 import {BrowserXhr, Http, HttpModule} from "@angular/http";
 import {TranslateLoader, TranslateModule, TranslateService, TranslateStaticLoader} from "ng2-translate";
 import {ChartsModule} from "ng2-charts";
-import {CustomBrowserXhr} from "./config";
 import {CommonService} from "../providers/common-service";
 import {StorageService} from "../providers/storage-service";
 import {DatabaseService} from "../providers/database-service";
+import {CustomBrowserXhr} from "../../lib/tslib/src/angular";
 
 /* the order doesn't matter */
 export const AppComponents = [
