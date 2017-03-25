@@ -3,15 +3,14 @@ import {Http} from "@angular/http";
 import "rxjs/add/operator/map";
 import {config, CustomBrowserXhr} from "../app/config";
 import {createDefer, Defer} from "../../lib/tslib/src/async";
-import * as Horizon from "@horizon/client/dist/horizon";
 import * as typeStubHorizon from "../../lib/typeStub-horizon-client/index";
-import {TableObject} from "../../lib/typeStub-horizon-client/index";
 import {clear} from "../../lib/tslib/src/array";
 import {User} from "../model/user";
 // import * as LargeLocalStorage from "../../lib/LargeLocalStorage/dist/index";
 import {Storage} from "@ionic/storage";
 import {Currency} from "../model/currency";
 import {StorageKey, StorageService} from "./storage-service";
+declare let Horizon: typeStubHorizon.HorizonFunc;
 
 /*
  Generated class for the DatabaseService provider.
@@ -178,8 +177,8 @@ export class DatabaseService {
   }
 }
 class Tables {
-  users: TableObject<User>;
-  currencies: TableObject<Currency>;
+  users: typeStubHorizon.TableObject<User>;
+  currencies: typeStubHorizon.TableObject<Currency>;
 }
 class DBCache {
   hz: typeStubHorizon.Horizon;

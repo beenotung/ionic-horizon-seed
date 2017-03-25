@@ -4,3 +4,4 @@ mkdir -p www
 ionic plugin reset
 git submodule update --init
 lib/tslib/inject-lib
+npm i -S ionic-native
