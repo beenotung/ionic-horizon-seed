@@ -12,7 +12,7 @@ import {StorageKey, StorageService} from "./storage-service";
 import {horizon_api_size, load_horizon_ng} from "../../lib/tslib/src/horizon";
 import {config} from "../app/config";
 import {CustomBrowserXhr} from "../../lib/tslib/src/angular";
-declare let Horizon: typeStubHorizon.HorizonFunc;
+declare let Horizon: typeStubHorizon.Horizon;
 
 /*
  Generated class for the DatabaseService provider.
