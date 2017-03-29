@@ -8,6 +8,7 @@ export namespace config {
   const version = "0.1.1";
   export const fallbackLang = 'en';
   export let typingSpeed = 1000 / 30;
+  export let retry_interval = 5000;
 
   const server_name = "STUB";
   class Delayed {

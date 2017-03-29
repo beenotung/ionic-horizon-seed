@@ -43,7 +43,7 @@ export class DatabaseService {
       });
       let url = (await config.initialize()).serverUrlBase() + 'horizon/horizon.js';
       let preF = () => console.log('loading horizon...');
-      await autoRetryAsync(() => load_horizon_ng(this.http, url, preF));
+      await autoRetryAsync(() => load_horizon_ng(this.http, url, preF), config.retry_interval);
       sub.unsubscribe();
 
       console.log('connecting to horizon...');
