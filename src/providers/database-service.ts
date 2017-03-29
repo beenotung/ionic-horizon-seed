@@ -39,7 +39,8 @@ export class DatabaseService {
     console.log('bootstrapping horizon...');
     (async () => {
       let sub = CustomBrowserXhr.progressEventEmitter.subscribe((event: any) => {
-        console.log(event.loaded, event.loaded / horizon_api_size * 100 + '%');
+        this.progress = event.loaded / horizon_api_size;
+        console.log(event.loaded, this.progress * 100 + '%');
       });
       let url = (await config.initialize()).serverUrlBase() + 'horizon/horizon.js';
       let preF = () => console.log('loading horizon...');
