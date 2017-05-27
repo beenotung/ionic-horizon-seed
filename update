@@ -5,3 +5,4 @@ if [ ! -d "$tmp_app" ]; then
 fi
 meld package.json "$tmp_app"/package.json
 lib/tslib/inject-lib
+echo 'done.'
