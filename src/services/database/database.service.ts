@@ -212,7 +212,7 @@ export class DatabaseService {
       return [SemverDiffType.same, remote_config];
     }
 
-    const res = tryWithDefault<SemverDiffType>(
+    const res = tryWithDefault<void, SemverDiffType>(
       () => getSemverDiffType(to_semver(remote_config.db_version), to_semver(DBConfig.db_version))
       , SemverDiffType.newer);
     switch (res) {

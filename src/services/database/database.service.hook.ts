@@ -21,8 +21,8 @@ export function hookCheckClientVersion(noticeService: NoticeService) {
       console.log("client is latest version");
       return "same version";
     }
-    const res = tryWithDefault<SemverDiffType>(() =>
-        getSemverDiffType(to_semver(remote_config.client_version), to_semver(config.client_version))
+    const res = tryWithDefault<void, SemverDiffType>(
+      () => getSemverDiffType(to_semver(remote_config.client_version), to_semver(config.client_version))
       , SemverDiffType.newer);
     switch (res) {
       case SemverDiffType.same:
@@ -46,7 +46,7 @@ export function hookCheckClientVersion(noticeService: NoticeService) {
         /* there is a breaking update */
         console.log("client is outdated");
         const title = "msg_.error_.update_client_title";
-        const type = tryWithDefault(() => getAppType(db.platform), "others");
+        const type = tryWithDefault<void, AppType | "others">(() => getAppType(db.platform), "others");
         const msg = "msg_.error_.update_client_" + type;
         db.translate.get([title, msg]).toPromise()
           .then(o => swal({
