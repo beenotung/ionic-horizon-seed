@@ -167,7 +167,10 @@
       "cordova-plugin-whitelist": {},
       "cordova-plugin-statusbar": {},
       "cordova-plugin-device": {},
-      "cordova-plugin-splashscreen": {}
+      "cordova-plugin-splashscreen": {},
+      "cordova-plugin-console": {},
+      "cordova-plugin-geolocation": {},
+      "cordova-plugin-uniquedeviceid": {}
     },
     "platforms": [
       "browser"
