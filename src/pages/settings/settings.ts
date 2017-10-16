@@ -7,7 +7,7 @@ import {StorageKey, StorageService} from "../../services/storage/storage.service
 export type Lang = "en" | "zh";
 
 @Component({
-  selector: "page-setting",
+  selector: "page-settings",
   templateUrl: "settings.html",
 })
 export class SettingsPage {

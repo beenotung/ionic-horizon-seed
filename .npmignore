@@ -2,7 +2,6 @@
 .git
 
 ## Dev scripts
-gencode
 auto-init
 auto-update
 build
