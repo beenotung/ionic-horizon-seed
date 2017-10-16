@@ -5,5 +5,5 @@ set -o pipefail
 ./auto-init
 
 node_modules/typescript/bin/tsc src/app/main.ts --lib es2015,dom --experimentalDecorators --sourcemap --target es5 --skipLibCheck
-node_modules/ionic/bin/ionic cordova build browser --aot --prod
+./ionic cordova build browser --aot --prod
 exit $?

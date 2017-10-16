@@ -1,2 +1,3 @@
 #!/bin/bash
-./node_modules/.bin/ionic cordova $@
+hash cordova 2>/dev/null || ./install-dev
+./ionic cordova $@

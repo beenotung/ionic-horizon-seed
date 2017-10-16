@@ -2,6 +2,7 @@
 
 hash yarn 2>/dev/null || npm i -g yarn
 yarn global add \
+  ionic cordova \
   npm-run \
   npm-check
 echo 'install-dev done.'
