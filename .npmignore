@@ -24,6 +24,7 @@ ionic
 lint
 publish
 resource
+test
 update
 upload
 version
@@ -33,7 +34,9 @@ ionic.config.json
 
 ## Typescript
 src
+tsconfig.json
 tsconfig-ng.json
+tsconfig-ionic.json
 tslint.json
 
 ## Ionic
@@ -73,6 +76,7 @@ docs
 tmp
 
 # Library files
+src/
 
 # Build files
 dist.list
