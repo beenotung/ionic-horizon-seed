@@ -8,6 +8,8 @@ function main {
   | grep -v '.scss$' \
   | grep -v '.json$' \
   | grep -v '.spec.ts' \
+  | grep -v '.js$' \
+  | grep -v '.js.map$' \
   | sed 's/\.ts//' \
   | awk '{print "export * from \"./" $1 "\";"}' \
   > index.ts

@@ -1,0 +1,17 @@
+#!/bin/bash
+set -e
+set -o pipefail
+
+./auto-init
+
+./ionic build
+
+cd www
+echo "stub.surge.sh" > CNAME
+echo "*" > CORS
+npm-run surge .
+cd ..
+
+./quick-publish-web
+
+echo 'done dev-web.'

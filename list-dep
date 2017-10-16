@@ -1,0 +1,12 @@
+#!/bin/bash
+list=$(\
+  rg import src | grep from | sed 's/ /\n/g' | grep ';' | awk -F '"' '{print $2}' | sort | uniq \
+    | grep '\.\./' -v | grep '\./' -v | sort | uniq \
+    | awk -F '/' '{print $1 "/" $2}' | sed 's,/$,,' | sort | uniq
+  )
+list2=$(rg node_modules src | awk -F 'node_modules' '{print $2}' | awk -F '/' '{print $2}')
+list=$(echo "$list $list2")
+has_name=$(echo "$list" | grep '^@')
+no_name=$(echo "$list" | grep -v '^@' | sed 's,/.*,,')
+list=$(echo "$has_name $no_name" | sort | uniq)
+echo "$list" 

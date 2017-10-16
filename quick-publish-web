@@ -1,0 +1,7 @@
+#!/bin/bash
+set -e
+set -o pipefail
+
+tar czf www.tar.gz www
+scp -i stub.pem www.tar.gz user@host:/tmp/www.tar.gz
+echo "uploaded to web server."

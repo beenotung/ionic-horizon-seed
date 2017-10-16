@@ -4,4 +4,4 @@ git status -s --ignored \
   | grep -v .idea \
   | grep -v node_modules \
   | awk '{print $2}' \
-  | xargs rm -r
+  | xargs rm -rv

@@ -1,0 +1,3 @@
+#!/bin/bash
+./auto-init
+yarn add `npm i 2>&1 | grep 'requires a peer of' | sed 's/requires a peer of /\n/' | grep -v 'npm WARN' | awk '{print $1}'`
