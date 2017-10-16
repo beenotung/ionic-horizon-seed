@@ -5,6 +5,7 @@ import {TranslateService} from "@ngx-translate/core";
 import {config} from "../../app/app.config";
 import {is_hk_mobile_phone} from "@beenotung/tslib/validate";
 import {StorageKey, StorageService} from "../../services/storage/storage.service";
+import {UserSessionService} from "../../services/user-session/user-session.service";
 
 @Component({
   selector: "page-login",
@@ -20,6 +21,7 @@ export class LoginPage {
   constructor(public navCtrl: NavController
     , private translate: TranslateService
     , private storage: StorageService
+    , private userSession: UserSessionService
     , public navParams: NavParams) {
 
     this.storage.get(StorageKey.lang).then(x => {
@@ -53,6 +55,7 @@ export class LoginPage {
 
   login() {
     console.log("login");
+    this.userSession.setUserID("mock_user");
     this.navCtrl.setRoot(TabsPage);
   }
 

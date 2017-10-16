@@ -27,12 +27,10 @@
   },
   "logout": "Logout",
   "tabs_": {
-    "my": "My Post",
-    "match": "Matched",
-    "match-tutor": "Tutor Posts",
-    "match-student": "Student Posts",
-    "invite": "Invites",
-    "connect": "Approval",
+    "tab1": "Tab 1",
+    "tab2": "Tab 2",
+    "tab3": "Tab 3",
+    "tab4": "Tab 4",
     "": ""
   },
   "nickname": "Nickname",

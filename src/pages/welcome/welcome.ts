@@ -4,7 +4,7 @@ import {TranslateService} from "@ngx-translate/core";
 import "rxjs/add/operator/toPromise";
 import {CommonService} from "../../services/common/common.service";
 import {DatabaseService} from "../../services/database/database.service";
-import {TabsPage} from "../tabs/tabs";
+import {LoginPage} from "../login/login";
 
 @Component({
   selector: "page-welcome",
@@ -31,13 +31,17 @@ export class WelcomePage implements OnInit {
   }
 
   ngOnInit() {
-    if (this.navParams.data) {
-      this.common.showLoading();
+    const f = () => {
+      if (this.text !== "Translate Success" || this.status !== "Ready") {
+        return setTimeout(f, 20);
+      }
+      this.common.showLoading("navigate to login screen after 2 seconds");
       setTimeout(() => {
         this.common.dismissLoading();
-        this.navCtrl.setRoot(TabsPage);
+        return this.navCtrl.setRoot(LoginPage);
       }, 2000);
-    }
+    };
+    setTimeout(f, 20);
   }
 
 }

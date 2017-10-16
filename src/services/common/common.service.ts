@@ -1,5 +1,6 @@
 import {Injectable} from "@angular/core";
 import "rxjs/add/operator/map";
+import "rxjs/add/operator/toPromise";
 import {StorageKey, StorageService} from "../storage";
 import {config} from "../../app/app.config";
 import {TranslateService} from "@ngx-translate/core";
@@ -15,6 +16,7 @@ import {hookCheckClientVersion} from "../database";
 import {NoticeService} from "../notice";
 import {WelcomePage} from "../../pages/welcome/welcome";
 import {swal} from "@beenotung/tslib/typestub-sweetalert2";
+import {setWindowProp} from "@beenotung/tslib";
 
 export interface NavMessage {
   type: "root" | "push"
@@ -62,6 +64,7 @@ export class CommonService {
       })
     ;
     hookCheckClientVersion(this.noticeService);
+    setWindowProp("translate", this.translate);
   }
 
   /**
@@ -121,9 +124,16 @@ export class CommonService {
     location.search = "";
   }
 
-  showLoading() {
+  async showLoading(msg?: string, translate: boolean = true) {
+    if (typeof msg !== "string") {
+      msg = "msg_.loading";
+      translate = true;
+    }
+    if (translate) {
+      msg = await this.translate.get(msg).toPromise();
+    }
     const x = this.loadingCtrl.create({
-      content: this.translate.instant("msg_.loading")
+      content: msg
     });
     this.loadings.push(x);
     return x.present();

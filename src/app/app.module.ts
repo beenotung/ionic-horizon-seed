@@ -24,7 +24,6 @@ import {StorageService} from "../services/storage/storage.service";
 import {LineModule} from "ioniclib";
 import {HorizonModule, LoadingModule, ProgressBrowserXhr, ProgressModule} from "angularlib";
 import {UniqueDeviceID} from "@ionic-native/unique-device-id";
-import {HttpClient} from "@angular/common/http";
 import {ComponentsModule} from "../components/components.module";
 import {LoadingService} from "../services/loading/loading.service";
 
@@ -34,12 +33,15 @@ export function provideStorage() {
   });
 }
 
-// export function HttpLoaderFactory(http: Http) {
-//   return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
-// }
-export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http);
+export function HttpLoaderFactory(http: Http) {
+  return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
 }
+
+/*
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
+}
+*/
 
 @NgModule({
   declarations: [

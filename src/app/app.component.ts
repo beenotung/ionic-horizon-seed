@@ -6,6 +6,7 @@ import {CommonService} from "../services/common/common.service";
 import {LoginPage} from "../pages/login/login";
 import {config} from "./app.config";
 import {Role} from "../model/data/role";
+import {WelcomePage} from "../pages/welcome/welcome";
 
 @Component({
   templateUrl: "app.html"
@@ -34,8 +35,7 @@ export class MyApp {
     });
     /* dev */
     if (config.mode === "dev") {
-      // this.rootPage = SignupStudentProfilePage;
-      // this.rootPage = DemoPopupPage;
+      this.rootPage = WelcomePage;
     }
   }
 }
