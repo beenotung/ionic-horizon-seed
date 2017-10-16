@@ -10,7 +10,7 @@ set -o pipefail
 
 ./build-web
 cd ./platforms/browser/www
-echo "STUB.surge.sh" > CNAME
+echo "ionic-horizon-seed.surge.sh" > CNAME
 echo "*" > CORS
 npm-run surge .
 cd ../../../
