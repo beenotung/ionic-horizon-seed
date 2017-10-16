@@ -46,11 +46,13 @@ export namespace DBConfig {
       }
     }
 
+    /* tslint:disable:no-invalid-this */
     const realSend = RealWebSocket.prototype.send;
     RealWebSocket.prototype.send = function () {
       // console.debug("[ws] send:", arguments);
       realSend.apply(this, arguments);
     };
+    /* tslint:enable:no-invalid-this */
 
     WrappedWebSocket.prototype = RealWebSocket.prototype;
 
