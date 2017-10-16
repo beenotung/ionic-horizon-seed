@@ -64,7 +64,12 @@ export function createQueryChain<Data extends BaseDBObject
       f(acc);
       return res;
     }
-    , find: () => table.find(acc, ...extra)
+    , find: () => {
+      if (extra.length > 0) {
+        throw new Error("find only take one argument");
+      }
+      return table.find(acc);
+    }
     , findAll: () => table.findAll(acc, ...extra)
     , has: () => res.find().fetch().defaultIfEmpty().map(x => isDefined(x))
     , hasSome: () => res.findAll().fetch().map(xs => xs.length > 0)
@@ -235,7 +240,7 @@ export class DatabaseService {
     return [res, remote_config];
   }
 
-  store<A extends BaseDBObject>(table: TableType<A>, x: A) {
+  store<A extends BaseDBObject>(table: TableType<A>, x: A | A[]) {
     return this.observeHz()
       .mergeMap(hz => hz<A, any>(table).store(x));
   }
@@ -257,15 +262,11 @@ export class DatabaseService {
   }
 
   find<Data extends BaseDBObject
-    , Index extends BaseSearchObject>(table: TableType<Data & Index>, xs: Index[]): Observable<FindQuery<Data>> {
-    if (xs.length == 0) {
-      return Observable.empty();
-    }
+    , Index extends BaseSearchObject>(table: TableType<Data & Index>, x: Index): Observable<FindQuery<Data>> {
     const f = table.toData || toData;
-    const y = f(xs.pop() as Index as any as Data);
-    const ys = xs.map(x => f(x as Index as any as Data));
+    const y = f(x as Index as any as Data);
     return this.observeRawHz()
-      .map(hz => hz<Data>(table.tableName).find(y, ...ys));
+      .map(hz => hz<Data>(table.tableName).find(y));
   }
 
   findAll<Data extends BaseDBObject

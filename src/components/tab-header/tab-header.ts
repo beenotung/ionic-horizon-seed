@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from "@angular/core";
 import {TranslateService} from "@ngx-translate/core";
 import {isDefined} from "@ngx-translate/core/src/util";
 import {NavController} from "ionic-angular";
-import {SettingPage} from "../../pages/setting/setting";
+import {SettingsPage} from "../../pages/settings/settings";
 
 /**
  * Generated class for the TabHeaderComponent component.
@@ -38,7 +38,7 @@ export class TabHeaderComponent implements OnInit {
   }
 
   showNavigation() {
-    this.nav.push(SettingPage, {}, {
+    this.nav.push(SettingsPage, {}, {
       animate: true
       , direction: "switch"
     });

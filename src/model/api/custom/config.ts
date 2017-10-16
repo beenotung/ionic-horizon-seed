@@ -22,7 +22,13 @@ export namespace Config {
   export const tableName = "Config";
 
   export function init(): Config {
-    return BaseDBObject.init() as Config;
+    const res = BaseDBObject.init() as Config;
+    res.db_version
+      = res.client_version
+      = res.admin_version
+      = res.sms_version
+      = "0.0.0";
+    return res;
   }
 }
 

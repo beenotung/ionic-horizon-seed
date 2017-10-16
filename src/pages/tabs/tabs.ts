@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild} from "@angular/core";
 import {NavController, Tabs} from "ionic-angular";
-import {SettingPage} from "../setting/setting";
+import {SettingsPage} from "../settings/settings";
 import {WelcomePage} from "../welcome/welcome";
 import {UserSessionService} from "../../services/user-session/user-session.service";
 
@@ -20,10 +20,10 @@ export class TabsPage implements OnInit {
 
   @ViewChild("tabs") tabs: Tabs;
 
-  tab1 = SettingPage;
-  tab2 = SettingPage;
-  tab3 = SettingPage;
-  tab4 = SettingPage;
+  tab1 = SettingsPage;
+  tab2 = SettingsPage;
+  tab3 = SettingsPage;
+  tab4 = SettingsPage;
 
   constructor(public navCtrl: NavController
     , private userSession: UserSessionService) {

@@ -8,9 +8,9 @@ export type Lang = "en" | "zh";
 
 @Component({
   selector: "page-setting",
-  templateUrl: "setting.html",
+  templateUrl: "settings.html",
 })
-export class SettingPage {
+export class SettingsPage {
 
   pushNotice: boolean = false;
   lang: Lang;
@@ -24,7 +24,7 @@ export class SettingPage {
   }
 
   ionViewDidLoad() {
-    console.log("ionViewDidLoad SettingPage");
+    console.log("ionViewDidLoad SettingsPage");
   }
 
   changeLang() {

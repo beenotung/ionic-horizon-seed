@@ -1,5 +1,5 @@
 export * from "./login";
 export * from "./search-select-list";
-export * from "./setting";
+export * from "./settings";
 export * from "./tabs";
 export * from "./welcome";

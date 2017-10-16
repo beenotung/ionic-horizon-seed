@@ -3,6 +3,7 @@ import {Storage} from "@ionic/storage";
 import "rxjs/add/operator/map";
 import {enum_only_string} from "@beenotung/tslib/enum";
 import {isDefined} from "@beenotung/tslib/lang";
+import {config} from "../../app/app.config";
 
 export enum StorageKey {
   lang
@@ -22,6 +23,9 @@ enum_only_string(StorageKey);
 @Injectable()
 export class StorageService {
   constructor(public storage: Storage) {
+    if (config.mode === "dev") {
+      window["storageService"] = this;
+    }
   }
 
   async has(key: StorageKey) {
@@ -50,4 +54,12 @@ export class StorageService {
     return this.storage.clear();
   }
 
+  /**
+   * preserve device id
+   * */
+  async reset() {
+    const id = await this.get(StorageKey.device_id);
+    await this.clear();
+    return this.set(StorageKey.device_id, id);
+  }
 }
