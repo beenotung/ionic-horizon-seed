@@ -1,6 +1,6 @@
 #!/bin/bash
 ./auto-init
-name="td-tmp"
+name="STUB"
 run_ionic="npm run ionic:serve"
 run_horizon="hz serve --dev --bind 0.0.0.0 --token-secret 65a301e1484863cb50359f118e1972c0"
 hash "tmux" 2>/dev/null

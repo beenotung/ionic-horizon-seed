@@ -1,0 +1,60 @@
+#!/bin/bash
+set -e
+set -o pipefail
+
+seedname="ionic-horizon-seed"
+seedurl="https://github.com/beenotung/$seedname.git"
+
+echo "seed: $seedurl"
+echo "going to create:"
+cat << EOF
+.
++-- <name>
+|   +-- <name>-horizon
+|   +-- <name>-ionic   (git)
+EOF
+if [ $# == 1 ]; then
+  name=$1
+  echo "project name: $name"
+else
+  echo -n 'project name: '; read name;
+fi
+mkdir "$name"
+cd $_
+# check hz
+set +e
+hash hz 2>/dev/null
+if [ "$?" != "0" ]; then
+  echo "installing hz..."
+  hash yarn 2>/dev/null || npm i -g yarn
+  set -e
+  yarn global add horizon
+else
+  set -e
+fi
+hz init "$name-horizon"
+cd "$name-horizon"
+git clone https://github.com/beenotung/horizon-seed.git
+mv horizon-seed/dev .
+mv horizon-seed/update .
+mv horizon-seed/.gitignore .
+rm horizon-seed -rf
+git init
+git add .
+git commit -m 'forked from horizon-seed'
+cd ../
+mkdir "$name-ionic"
+cd $_
+git init
+git remote add seed "$seedurl"
+git fetch seed master
+git branch master seed/master
+git add . -A
+git reset --hard HEAD
+sed -i "s/STUB/$name/" serve
+cd .idea
+mv "$seedname.iml" "$name-ionic.iml"
+sed "s,$seedname,$name-ionic,g" -i modules.xml
+git add "$seedname.iml" "$name-ionic.iml" modules.xml
+git commit -m "forked from $seedname"
+echo "ok, created '$name' from seed '$seedname'"
