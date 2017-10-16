@@ -26,6 +26,7 @@ import {HorizonModule, LoadingModule, ProgressBrowserXhr, ProgressModule} from "
 import {UniqueDeviceID} from "@ionic-native/unique-device-id";
 import {HttpClient} from "@angular/common/http";
 import {ComponentsModule} from "../components/components.module";
+import {LoadingService} from "../services/loading/loading.service";
 
 export function provideStorage() {
   return new Storage({
@@ -116,6 +117,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     UserSessionService,
     BugReportService,
     NoticeService,
+    LoadingService,
   ]
 })
 
