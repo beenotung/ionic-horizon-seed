@@ -26,10 +26,10 @@
     <preference name="SplashScreenBackgroundColor" value="#4e8ef7" />
     <preference name="SplashScreenDelay" value="3000" />
     <preference name="loadUrlTimeoutValue" value="120000" />
-    <engine name="browser" spec="5.0.0" />
     <plugin name="ionic-plugin-keyboard" spec="^2.2.1" />
     <plugin name="cordova-plugin-whitelist" spec="^1.3.2" />
     <plugin name="cordova-plugin-statusbar" spec="^2.2.2" />
     <plugin name="cordova-plugin-device" spec="^1.1.4" />
     <plugin name="cordova-plugin-splashscreen" spec="^4.0.3" />
+    <engine name="browser" spec="~5.0.0" />
 </widget>

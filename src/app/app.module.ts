@@ -21,9 +21,10 @@ import {NoticeService} from "../services/notice/notice.service";
 import {WelcomePage} from "../pages/welcome/welcome";
 import {DatabaseService} from "../services/database/database.service";
 import {StorageService} from "../services/storage/storage.service";
-import {LineModule} from "ioniclib";
-import {HorizonModule, LoadingModule, ProgressBrowserXhr, ProgressModule} from "angularlib";
 import {UniqueDeviceID} from "@ionic-native/unique-device-id";
+import {HorizonModule, LoadingModule, ProgressBrowserXhr, ProgressModule} from "angularlib";
+import {LineModule} from "ioniclib";
+import {HttpClient} from "@angular/common/http";
 import {ComponentsModule} from "../components/components.module";
 
 export function provideStorage() {
@@ -32,8 +33,11 @@ export function provideStorage() {
   });
 }
 
-export function HttpLoaderFactory(http: Http) {
-  return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
+// export function HttpLoaderFactory(http: Http) {
+//   return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
+// }
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
 }
 
 @NgModule({
