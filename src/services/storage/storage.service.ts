@@ -4,6 +4,7 @@ import "rxjs/add/operator/map";
 import {enum_only_string} from "@beenotung/tslib/enum";
 import {isDefined} from "@beenotung/tslib/lang";
 import {config} from "../../app/app.config";
+import {setWindowProp} from "@beenotung/tslib";
 
 export enum StorageKey {
   lang
@@ -24,7 +25,7 @@ enum_only_string(StorageKey);
 export class StorageService {
   constructor(public storage: Storage) {
     if (config.mode === "dev") {
-      window["storageService"] = this;
+      setWindowProp(this.constructor.name, this);
     }
   }
 

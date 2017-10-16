@@ -6,14 +6,14 @@
     "noEmit": false,
     "sourceMap": true,
     "declaration": false,
-    "noImplicitAny": false,
+    "noImplicitAny": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "lib": [
       "es2015",
       "dom"
     ],
-    "typeRoots" : [
+    "typeRoots": [
       "./node_modules/@types"
     ],
     "types": [

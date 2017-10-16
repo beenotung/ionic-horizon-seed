@@ -84,7 +84,7 @@
     "@angular/http": "4.4.3",
     "@angular/platform-browser": "4.4.3",
     "@angular/platform-browser-dynamic": "4.4.3",
-    "@beenotung/tslib": "^8.0.1",
+    "@beenotung/tslib": "^8.1.0",
     "@ionic-native/core": "^4.3.1",
     "@ionic-native/geolocation": "^4.1.0",
     "@ionic-native/splash-screen": "^4.3.1",

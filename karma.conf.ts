@@ -1,24 +1,34 @@
-import webpackTestConfig from './webpack-test.config';
-import { ConfigOptions } from 'karma';
+import webpackTestConfig from "./webpack-test.config";
+import {ConfigOptions} from "karma";
 
-export default (config) => {
+
+declare interface Config {
+  set: (config: ConfigOptions) => void;
+  LOG_DISABLE: string;
+  LOG_ERROR: string;
+  LOG_WARN: string;
+  LOG_INFO: string;
+  LOG_DEBUG: string;
+}
+
+export default (config: Config) => {
   config.set({
     // Base path that will be used to resolve all patterns (eg. files, exclude).
-    basePath: './',
+    basePath: "./",
 
     // Frameworks to use.
     // Available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['jasmine'],
+    frameworks: ["jasmine"],
 
     // List of files to load in the browser.
     files: [
-      'karma-test-entry.ts'
+      "karma-test-entry.ts"
     ],
 
     // Preprocess matching files before serving them to the browser.
     // Available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-      'karma-test-entry.ts': ['webpack', 'sourcemap']
+      "karma-test-entry.ts": ["webpack", "sourcemap"]
     },
 
     webpack: webpackTestConfig,
@@ -33,18 +43,18 @@ export default (config) => {
     },
 
     mime: {
-      'text/x-typescript': [ 'ts' ]
+      "text/x-typescript": ["ts"]
     },
 
     coverageIstanbulReporter: {
-      reports: ['text-summary', 'html', 'lcovonly'],
+      reports: ["text-summary", "html", "lcovonly"],
       fixWebpackSourcePaths: true
     },
 
     // Test results reporter to use.
     // Possible values: 'dots', 'progress'.
     // Available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['mocha', 'coverage-istanbul'],
+    reporters: ["mocha", "coverage-istanbul"],
 
     // Level of logging
     // Possible values:
@@ -57,11 +67,11 @@ export default (config) => {
 
     // Start these browsers.
     // Available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['Chrome'],
+    browsers: ["Chrome"],
 
     browserConsoleLogOptions: {
       terminal: true,
-      level: 'log'
+      level: "log"
     },
 
     singleRun: true,

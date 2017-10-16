@@ -41,7 +41,7 @@ export namespace UserAnalytics {
               return;
           }
           try {
-            acc[x] = navigator[x]();
+            acc[x] = f_o();
           } catch (e) {
             console.error("failed when mapping navigator field:", x, e);
             debugger;
