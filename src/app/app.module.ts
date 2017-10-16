@@ -21,9 +21,9 @@ import {NoticeService} from "../services/notice/notice.service";
 import {WelcomePage} from "../pages/welcome/welcome";
 import {DatabaseService} from "../services/database/database.service";
 import {StorageService} from "../services/storage/storage.service";
-import {UniqueDeviceID} from "@ionic-native/unique-device-id";
-import {HorizonModule, LoadingModule, ProgressBrowserXhr, ProgressModule} from "angularlib";
 import {LineModule} from "ioniclib";
+import {HorizonModule, LoadingModule, ProgressBrowserXhr, ProgressModule} from "angularlib";
+import {UniqueDeviceID} from "@ionic-native/unique-device-id";
 import {HttpClient} from "@angular/common/http";
 import {ComponentsModule} from "../components/components.module";
 

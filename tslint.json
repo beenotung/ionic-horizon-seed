@@ -8,6 +8,7 @@
   ],
   "rules": {
     "no-reference": false,
+    "only-arrow-functions": false,
     "max-classes-per-file": [
       false
     ],

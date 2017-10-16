@@ -1,4 +1,3 @@
 #!/bin/bash
 ./auto-init
 node_modules/.bin/tsc --watch src/*.ts --lib es2015,dom --experimentalDecorators --target es5 --skipLibCheck
-#node_modules/.bin/ionic-app-scripts watch

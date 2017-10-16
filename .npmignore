@@ -2,6 +2,7 @@
 .git
 
 ## Dev scripts
+gencode
 auto-init
 auto-update
 build
@@ -29,11 +30,14 @@ update
 upload
 version
 
+## Source config
+.editorconfig
+
 ## Config
 ionic.config.json
 
 ## Typescript
-src
+src/
 tsconfig.json
 tsconfig-ng.json
 tsconfig-ionic.json
