@@ -10,6 +10,8 @@ function main {
   | grep -v '.spec.ts' \
   | grep -v '.js$' \
   | grep -v '.js.map$' \
+  | grep -v '.md$' \
+  | grep -v '.asciidoc$' \
   | sed 's/\.ts//' \
   | awk '{print "export * from \"./" $1 "\";"}' \
   > index.ts

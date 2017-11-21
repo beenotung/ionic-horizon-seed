@@ -9,6 +9,8 @@ for a in $@; do
   mv "src/app/$m/$m.component.spec.ts" "src/components/$m/$m.component.spec.ts"
   rm "src/app/$m" -rf
   mv "src/components/$m/$m.ts" "src/components/$m/$m.component.ts"
+  mv "src/components/$m/$m.html" "src/components/$m/$m.component.html"
+  sed -i "s/$m.html/$m.component.html/" "src/components/$m/$m.component.ts"
   sed -i "/$classname/,+1 d" src/app/app.module.ts
   sed -i "s,'./$m/$m',\"./$m/$m.component\"," src/components/components.module.ts
 done
