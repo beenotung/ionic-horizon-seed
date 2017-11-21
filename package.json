@@ -46,7 +46,7 @@
     "clean": "npm run clean:tmp && rimraf node_modules && npm run ionic:clean",
     "clean:tmp": "npm run dist:unmove && rimraf coverage dist tmp docs www",
     "codecov": "cat coverage/lcov.info | codecov",
-    "docs": "compodoc -p tsconfig.json -d docs --disableCoverage --disablePrivateOrInternalSupport",
+    "docs": "compodoc -p tsconfig.json -d docs --disableCoverage --disablePrivate --disableProtected --disableInternal",
     "explorer": "source-map-explorer ./dist/index.umd.js",
     "gh-pages": "rimraf docs && npm run docs && gh-pages -d docs",
     "lint": "run-s tslint lint:ionic",
@@ -121,7 +121,7 @@
   },
   "devDependencies": {
     "@angular/cli": "^1.3.2",
-    "@compodoc/compodoc": "^1.0.0-beta.9",
+    "@compodoc/compodoc": "^1.0.4",
     "@ionic/app-scripts": "3.0.0",
     "@types/isomorphic-fetch": "0.0.34",
     "@types/jasmine": "^2.5.47",
