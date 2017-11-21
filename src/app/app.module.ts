@@ -5,6 +5,7 @@ import {SplashScreen} from "@ionic-native/splash-screen";
 import {StatusBar} from "@ionic-native/status-bar";
 import {Storage} from "@ionic/storage";
 import {BrowserXhr, Http, HttpModule} from "@angular/http";
+import {HttpClient} from "@angular/common/http";
 
 import {MyApp} from "./app.component";
 import {CommonService} from "../services/common/common.service";
@@ -33,15 +34,9 @@ export function provideStorage() {
   });
 }
 
-export function HttpLoaderFactory(http: Http) {
-  return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
-}
-
-/*
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
 }
-*/
 
 @NgModule({
   declarations: [
