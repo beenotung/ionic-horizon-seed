@@ -2,7 +2,7 @@
 ./auto-init
 name="STUB"
 run_ionic="npm run ionic:serve"
-run_horizon="hz serve --dev --bind 0.0.0.0 --token-secret 65a301e1484863cb50359f118e1972c0"
+run_horizon="./dev"
 hash "tmux" 2>/dev/null
 if [ $? == 0 ]; then
   ## has tmux installed
